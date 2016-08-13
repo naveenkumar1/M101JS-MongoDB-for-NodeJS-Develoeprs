@@ -1,0 +1,13 @@
+<html>
+<head>
+	<title>
+		MongoDB Movies list
+	</title>
+</head>
+<body>
+<h1>Here is the final list of movies you opted for</h1>
+{% for movie in movies%}
+<li>{{movie.name}}</li>
+{% endfor %}
+</body>
+</html>

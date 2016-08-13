@@ -1,0 +1,14 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<h1>Movies</h1>
+{% for movie in movies%}
+<li><a href="http://www.imdb.com/title/{{movie.name}}">{{movie.year}},{{movie.rating}}</a></li>
+{%else%}
+<p>No movies found</p>
+{% endfor %}
+
+</body>
+</html>
