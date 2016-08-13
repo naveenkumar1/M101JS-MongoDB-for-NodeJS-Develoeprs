@@ -74,3 +74,32 @@ Say you have a key with an array and you remember that key has only two values t
 
 $elemMatch is used to find the values of documents in an array
 it means if a key in a document has an array of documents and you want to apply condition on some of the parameters on the document in the array then $elemMatch works super cool :) 
+
+
+Updating Documents
+
+Documents can be updated by using $set operator
+$set modifies the value of the key 
+Say if the value of an key is an array it is modified to key-value pair
+So if you want to update the array then use the $push operator
+And if you want to remote specifie element from the array then use $pull operator
+If you want to add set of Elements to the array  then use $ pushAll operator
+The same can be used to pull the elements from the array by using $pullAll operator
+If you want to remove the last element in the array then you can use the $pop operator
+
+//Field Update Operators($inc,$mul,$set,$unset,$min,$rename,$max)
+If you want to increment the value of something then you to use the $inc operator and if you want to multiply then you ahve to use $mul operator
+db.movieDetails.update({"title":"Rang De Basanti"},{$inc:{"imdb.rating":1.1}}) // This command increments the rating by 1.1
+db.movieDetails.update({"title":"Rang De Basanti"},{$mul:{"awards.wins":6}}) // This command multiplies the awards by 6
+db.movieDetails.rename({"title":"Rang De Basanti"},{$rename:{"director":"chiefguy"}}) // This command is sued to rename the key portion if some thing is wrong 
+db.movieDetails.update({"title":"Rang De Basanti"},{$unset:{"chiefguy":"Rakeysh Omprakash Mehra"}}) // This command deletes the entry of director for that movie
+This is used for deleting the individual parts of the document
+db.movieDetails.update({"title":"Rang De Basanti"},{$set:{"chiefguy":"Rakeysh Omprakash Mehra"}})//This command adds the entry of director for that movie
+db.movieDetails.update({"title":"Rang De Basanti"},{$min:{"imdb.rating":7.7}})//This command updates the rating for that movie if the given rating is less than the existing rating otherwise no affect takes place
+This command is helpful if we don't know what is the value of rating present in the db and you want to update only if the value you supplied is less
+db.movieDetails.update({"title":"Rang De Basanti"},{$max:{"imdb.rating":9}})//This command updates the rating for that movie if the given rating is more than the existing rating otherwise no affect takes place
+This command is helpful if we don't know what is the value of rating present in the db and you want to update only if the value you supplied is more
+Upsert:true -- option at the end results in the insertion of the document if that document is not present in db
+$setOnInsert --- inserting two docs parallely into an empty collection may require $setOnInsert
+
+//
