@@ -50,3 +50,27 @@ $nor--inverse of $or
 $and is used to specify multiple specify criteria on the same field
 or else we can use the normal find operation without and
 $exists is used to match all those documents where certain parameter exists in those documents
+
+Regex Operators
+These are used to fetch the matching text
+
+Array Operators
+$all operator --- 
+This is used to match all the elements in the array you specify irrespective of the order they are present
+I was unable to understand the real importance of $all operator because there is an exact match of an array
+but when you are doing the exact match of an array you have to specify the order in which the elements are present.
+Using $all removes such constraint
+ Say you have requirementof genres array
+ you have to query in the following way 
+ db.movieDetails.find("genres":["Action,"Crime","Drama"])
+ here you need to specify the order in which they are present in the database
+ But of you are not sure about the order then it is safe to write query in the following way4
+
+ db.movieDetails.find({"genres":{$all:["Action","Drama","Crime"]}})
+
+$ size operator
+This operator is useful for finding the length of the field 
+Say you have a key with an array and you remember that key has only two values then it is easy to search for that particular key using the $size operator
+
+$elemMatch is used to find the values of documents in an array
+it means if a key in a document has an array of documents and you want to apply condition on some of the parameters on the document in the array then $elemMatch works super cool :) 
