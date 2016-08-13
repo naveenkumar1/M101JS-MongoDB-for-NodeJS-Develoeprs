@@ -81,11 +81,31 @@ Updating Documents
 Documents can be updated by using $set operator
 $set modifies the value of the key 
 Say if the value of an key is an array it is modified to key-value pair
+//Array Update Operators
 So if you want to update the array then use the $push operator
 And if you want to remote specifie element from the array then use $pull operator
 If you want to add set of Elements to the array  then use $ pushAll operator
 The same can be used to pull the elements from the array by using $pullAll operator
 If you want to remove the last element in the array then you can use the $pop operator
+$addToSet -- As all knows setonly allows unique values addToSet adds only if the values are not present
+$each operator can be used to add the values to the array by checking if the operator is not present
+$slice operator to slice the array after updating 
+For using the $slice operator we must use the $push operator adn $each operator and specify $slice then
+
+Example:- db.movieDetails.update({"title":"Rang De Basanti"},
+									{"$push":{"actors":{$each:[],$slice:-5}}})
+
+$sort operator to sort the array after updating
+For using the $sort operator we must use the $push operator adn $each operator and specify $sort then
+
+Example:- db.movieDetails.update({"title":"Rang De Basanti"},
+									{"$push":{"actors":{$each:[],$sort:{"actors":1}}}})
+$position operator is used for inserting at the starting of the array
+FOr using the $position operator we have to use $push operator too
+and $each and position index finally
+ so the query looks as the follwing
+ db.movieDetails.update({"title":"Rang De Basanti"},{"$push":{actors:{$each:[],$position:0}}})
+
 
 //Field Update Operators($inc,$mul,$set,$unset,$min,$rename,$max)
 If you want to increment the value of something then you to use the $inc operator and if you want to multiply then you ahve to use $mul operator
@@ -101,5 +121,5 @@ db.movieDetails.update({"title":"Rang De Basanti"},{$max:{"imdb.rating":9}})//Th
 This command is helpful if we don't know what is the value of rating present in the db and you want to update only if the value you supplied is more
 Upsert:true -- option at the end results in the insertion of the document if that document is not present in db
 $setOnInsert --- inserting two docs parallely into an empty collection may require $setOnInsert
-
-//
+$currentDate --  this is used for including the timestamp and the ISO date at which the document is modified
+db.movieDetails.find({"title":"Rang De Basanti"},{$currentDate:{"lastModified":true,"timestamp":{$type:"timestamp"}}});// THis adds the current timestamp and the ISO date same as set method
