@@ -11,3 +11,42 @@ And if you are doing batch processing by using insertMany command if the operati
 If you want to make the writes happen except for the one with duplicate id we have to specify the parameter {ordered:true} to push all the writes into the database
 It supports data integrity-- which means we can't insert 2 documents into db with the same _id.
 
+//Reading documents in MongoDB
+
+db.collectionname.findOne()--- to return one file
+db.collectionname.findOne().pretty() -- for pretty priniting the file on the mongodb console
+db.collectionname.find() ---- to return all the documents
+
+We can have a cursor initialized on db.collectionname.find({}) and we can set to a cursor this will be helpful
+if cursor.hasNext() -- checks if there are any more values that need to be returned
+if it is true it returns the next value by using cursor.next() 
+if it is false it returns an error
+Batch size will not exceed the maximum bson document size
+cursor is automically iterated upto 20 times
+the first batch is returned upto 101 documents or of a maximum size of 1MB
+the next batches return a maximum size of 4MB
+When MongoDB is fetching results from the data base it fetches the data in batches
+the batch has a maximum of 101 documents or 1 MB of data
+when these 101 documents are displayed to the user it again fetches the data in Batches now at a batch size of 4MB.
+Even though it fetches 101 documents by batch and keep in its memory it will display maximum of 20 documents only
+
+Projections
+It returns only the fields that are requested by limiting to the items only we want
+It reduces the network overhead as the large amount of data that need to be transfered on the distribution is reduced and it increases the processing capability
+Projections are supplied as the second command to the find command if we want something only we have to specify that parameter as 1 
+so that only the document with that field and _id is returned by default
+but if we want some field not to be display we can mark projection as 0 so that except that fields rest of the fields are returned
+
+Comparision operators
+$eq,$ne,$gt,$gte,$lt,$lte,$in,$nin
+db.movieDetails.find({"tomato.meter":{$gt:60,$lt:100}},{"title":1,"_id":0});
+
+Element operators
+$exists,$type-- string value--2
+
+Logical Operators
+$and,$or,$nor,$not
+$nor--inverse of $or
+$and is used to specify multiple specify criteria on the same field
+or else we can use the normal find operation without and
+$exists is used to match all those documents where certain parameter exists in those documents
