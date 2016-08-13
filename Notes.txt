@@ -1,0 +1,13 @@
+_id is a combination of The time stamp+Mac address of the machine+process id of the machine +counter running
+time stampfield occupies first4 bytes
+mac address occupies the first 3bytes
+process id of the machine occupies next 2 bytes
+counter running occupies  next 3 bytes
+so a total combinatiion of 4+3+2+3 makes 12 bytes the _id
+
+Even we can specify the _id on our own but it should be unique. But if it is not unique it throws a write error
+And if you are doing batch processing by using insertMany command if the operation fails because of the duplicate id the all other writes that are expected to happen post to that will fail.
+
+If you want to make the writes happen except for the one with duplicate id we have to specify the parameter {ordered:true} to push all the writes into the database
+It supports data integrity-- which means we can't insert 2 documents into db with the same _id.
+
