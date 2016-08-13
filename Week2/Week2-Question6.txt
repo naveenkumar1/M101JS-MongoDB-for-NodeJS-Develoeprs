@@ -1,0 +1,23 @@
+Suppose you wish to update the value of the "plot" field for one document in our "movieDetails" collection to correct a typo. Which of the following update operators and modifiers would you need to use to do this?
+
+Options:-
+
+$each
+$rename
+$set
+$slice
+$position
+$push
+$sort
+$addToSet
+$unset 
+
+Answer: - $set
+You'll go with  the correct answer if you haven't read the documentation
+But if you read the documentation you'll go wrong with this question.Even I went :'(
+
+As it is mentioned in the question it is to correct to a typo it is $rename
+
+If you are not aware of $rename 
+$rename does the changing of the key name I thought key may be the wrong 
+Probably I'm a big idiot :(

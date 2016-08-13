@@ -123,3 +123,14 @@ Upsert:true -- option at the end results in the insertion of the document if tha
 $setOnInsert --- inserting two docs parallely into an empty collection may require $setOnInsert
 $currentDate --  this is used for including the timestamp and the ISO date at which the document is modified
 db.movieDetails.find({"title":"Rang De Basanti"},{$currentDate:{"lastModified":true,"timestamp":{$type:"timestamp"}}});// THis adds the current timestamp and the ISO date same as set method
+
+
+//Bit Operator
+$bit performs the bitwise operations on the data present in the database
+Bitwise operations such as AND,XOR,OR bitwise are performed
+
+//Isolated operator
+$isolated Modifies the behavior of a write operation to increase the isolation of the operation.
+it holds the write lock on the stored engine more than expected and it allows the document level locking on WiredTiger engine and it amkeds WiredTiger single threaded
+
+{multi:true} affects the multiple documents

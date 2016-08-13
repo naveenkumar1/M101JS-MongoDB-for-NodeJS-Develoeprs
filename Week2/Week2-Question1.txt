@@ -1,0 +1,35 @@
+First load the collection into the database on Windows machine by using the command
+Open command prompt then type the following command
+mongorestore -d m101 -c movieDetails "path to the movieDetails.bsonfile"
+Example :- mongorestore -d m101 -c movieDetails "C:/Users/HP15/Desktop/M101JS/movieDetails.bson"
+
+Coming to the question
+Question 1 
+
+Which of the choices below is the title of a movie from the year 2013 that is rated PG-13 and won no awards? Please query the video.movieDetails collection to find the answer.
+
+NOTE: There is a dump of the video database included in the handouts for the "Creating Documents" lesson. Use that data set to answer this question.
+
+Options:- 
+A Decade of Decadence, Pt. 2: Legacy of Dreams
+Thor: The Dark World
+Evil Dead
+Iron Man 3
+Saving Mr. Banks
+World War Z
+Journey to the West
+Escape from Planet Earth
+Man of Steel
+A Tribute to J.J. Abrams 
+
+Answer :- A Decade of Decadence, Pt. 2: Legacy of Dreams
+
+Approach:-
+first know the structure of any document in movieDetails collection by using db.movieDetails.findOne()
+
+Then as per the question 
+execute the following command
+db.movieDetails.find({"year":2013,"rated":"PG-13","awards.wins":0},{"title":1,"_id":0})
+as awards is an object and it contains the wins you have to get wins by using awards.wins same as in Javascript
+As we want to know only the title of the movie only we need a projection to get answer directly :D
+

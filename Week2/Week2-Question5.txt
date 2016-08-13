@@ -1,0 +1,30 @@
+As a follow up to the previous question, how many documents in the video.movieDetails collection list both "Comedy" and "Crime" as genres regardless of how many other genres are listed?
+
+NOTE: There is a dump of the video database included in the handouts for the "Creating Documents" lesson. Use that data set to answer this question.
+
+Options:-
+
+13
+29
+44
+56
+82
+109
+248
+476
+500
+514
+874 
+
+Answer:-56
+
+Approach :-
+Asit says irrespective of the order that means we have to do more something than exact array matching
+
+SO we have to match all those results that have genres enteries "Crime","Comedy" and rest others too and "Comedy","Crime" order not taken into consideration
+
+So the following query would return the answer
+
+db.movieDetails.find({"genres":{$all:["Comedy","Crime"]}}).count()
+
+The following commands returns you the answer 

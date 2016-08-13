@@ -1,0 +1,26 @@
+First load the collection into the database on Windows machine by using the command
+Open command prompt then type the following command
+mongorestore -d m101 -c movieDetails "path to the movieDetails.bsonfile"
+Example :- mongorestore -d m101 -c movieDetails "C:/Users/HP15/Desktop/M101JS/movieDetails.bson"
+
+Question:-
+How many documents in our video.movieDetails collection list just the following two genres: "Comedy" and "Crime" with "Comedy" listed first.
+
+NOTE: There is a dump of the video database included in the handouts for the "Creating Documents" lesson. Use that data set to answer this question.
+
+Options:- 
+0
+9
+14
+20
+33
+47
+62
+101
+122
+205 
+
+Answer:-20
+
+It can be obtained by using the following command
+db.movieDetails.find({"genres":["Comedy","Crime"]}).count()

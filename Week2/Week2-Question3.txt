@@ -1,0 +1,29 @@
+First load the collection into the database on Windows machine by using the command
+Open command prompt then type the following command
+mongorestore -d m101 -c movieDetails "path to the movieDetails.bsonfile"
+Example :- mongorestore -d m101 -c movieDetails "C:/Users/HP15/Desktop/M101JS/movieDetails.bson"
+
+Using the video.movieDetails collection, how many movies list "Sweden" second in the the list of countries.
+NOTE: There is a dump of the video database included in the handouts for the "Creating Documents" lesson. Use that data set to answer this question.
+
+options:-
+
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14 
+
+Answer:- 6
+
+as it says sweden should be the 2nd country in the countries we have to search by using array index
+
+As sweden is at 2nd position the index of Sweden will be 1(not 2 :P It returns 4 for 2 :D no option)
+
+the following query returns the answer
+db.movieDetails.find({"countries.2":"Sweden"}).count()

@@ -1,0 +1,27 @@
+First load the collection into the database on Windows machine by using the command
+Open command prompt then type the following command
+mongorestore -d m101 -c movieDetails "path to the movieDetails.bsonfile"
+Example :- mongorestore -d m101 -c movieDetails "C:/Users/HP15/Desktop/M101JS/movieDetails.bson"
+
+Using the video.movieDetails collection, which of the queries below would produce output documents that resemble the following. Check all that apply.
+
+NOTE: We are not asking you to consider specifically which documents would be output from the queries below, but rather what fields the output documents would contain.
+
+{ "title" : "P.S. I Love You" }
+{ "title" : "Love Actually" }
+{ "title" : "Shakespeare in Love" }
+
+Options:-
+db.movieDetails.find({title: ""}, {title: 1})
+db.movieDetails.find({title: "Muppets from Space"}, {title: 1})
+db.movieDetails.find({year: 1964}, {title: 1, _id: 0})
+db.movieDetails.find({}, {title: 1, _id: 0})
+db.movieDetails.find({}, {title: 1})
+db.movieDetails.find({}, {title}) 
+
+Answer:-
+As in the projection if we won't specify _id:0 explicitly it is returned by default
+So the answer should contain those where _id:0 is present
+so answers are db.movieDetails.find({year: 1964}, {title: 1, _id: 0}) and db.movieDetails.find({}, {title: 1, _id: 0})
+
+I think it's not rocket science :D
