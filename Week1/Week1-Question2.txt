@@ -21,3 +21,5 @@ If you have the mongodb driver installed correctly, this will print out the mess
 Answer
 
 I like kittens
+
+The answer will get printed on the console
