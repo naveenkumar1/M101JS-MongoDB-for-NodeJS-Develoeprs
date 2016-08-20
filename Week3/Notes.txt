@@ -1,0 +1,1 @@
+We can use cursors to pull datta one after another rather than pulling all the data at the same time and storing the data in the memory. 
