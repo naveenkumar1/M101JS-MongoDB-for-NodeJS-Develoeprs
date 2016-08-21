@@ -1,1 +1,3 @@
 We can use cursors to pull datta one after another rather than pulling all the data at the same time and storing the data in the memory. 
+****************Using Regualr Expressions ***************************
+$options is designed to use with $regex and it is used for case insenstive searching that means lower case a and upperr case A are treated the same
