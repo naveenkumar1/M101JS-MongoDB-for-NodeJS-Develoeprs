@@ -4,7 +4,7 @@ var MongoClient = require("mongodb").MongoClient,
 var options = commandLineOptions();
 MongoClient.connect("mongodb://localhost:27017/m101",function(err,db){
 	assert.equal(err,null);
-	projection={"_id":0,"name":1,"employees":1,"founded_year":1,"ipo":1}
+	projection={"_id":0,"name":1,"number_of_employees":1,"founded_year":1,"ipo":1}
 	var query = queryConstructor(options);
 	var cursor = db.collection('companies').find(query);
 	cursor.project(projection);
