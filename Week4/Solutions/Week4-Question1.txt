@@ -1,0 +1,35 @@
+Question:-
+Please review the data model for the Crunchbase companies data set. The document from this collection for Facebook is attached in the handout for convenience. Documents in this collection contain several array fields including one for "milestones".
+
+Suppose we are building a web site that will display companies data in several different views. Based on the lessons in this module and ignoring other concerns, which of the following conditions favor embedding milestones (as they are in the facebook.json example) over maintaining milestones in a separate collection. Check all that apply.
+
+Note: Schema design is as much an art as a science. If you get the answer wrong on your first attempt. Please visit the forum to discuss with your fellow students.
+The number of milestones for a company rarely exceeds 10 per year.
+Milestones will never contain more than 15 fields
+An individual milestone entry will always be smaller than 16K bytes
+One frequently displayed view of our data displays company details such as the "name", "founded_year", "twitter_username", etc. as well as milestones.
+Some of the milestone fields such as "stoneable_type" and "stoneable" are frequently the same from one milestone to another. 
+
+Answer:-
+The number of milestones for a company rarely exceeds 10 per year.
+One frequently displayed view of our data displays company details such as the "name", "founded_year", "twitter_username", etc. as well as milestones.
+
+Explanation:-
+When  we're pullling the data from the database into the memory we have to embed the data in such a way that the roundtrips to the database should be reduced and the improved performance,So we need to restrict the amount of data as much as possible.
+
+If there are more fields that needs to be pulled into the memory it affects the performance.SO we have to design in such a way that less and useful content only needs tobe pulled
+So the first option "The number of milestones for a company needs to be less than 10" as the smallest dat improves performance and that to if there are more than 10 then there is apossibility of exceeding 16MB data limit so first option is the possible answers
+
+Milestones will never contain more than 15 fields is not an answer because number of fields doesn't decide the schema design. We may have 2 fields which has video content which is greater than 16M.B which is not suitable for embedding so it sucks
+There is no restriction on the minimum size of data it may be from less to max of 16M.B 
+so the options 2 and 3 are wrong
+
+We have to embed the data based on the application design pattern so the frequently accessed fields need to be placed in a view---Correct
+
+Some of the milestone fields such as "stoneable_type" and "stoneable" are frequently the same from one milestone to another. 
+THis has nothing to do with the schema design and when they are same it is better to avoid embedding andthe embedding is strongly discouraged
+
+So the possible options are 1 and 4
+
+
+

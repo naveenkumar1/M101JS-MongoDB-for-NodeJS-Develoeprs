@@ -1,0 +1,17 @@
+MongoDB has application-schema driven database and even MongoDB supports 3rd Normal form same as that in Relational Databases
+MongoDB has several advantages like
+DOcument rich database
+MongoDB doesn't support joins inside the kernel.Instead we can join the documents by using embedded documents
+(Joins are hard to scale and it affects the performance)
+It doesnot support Transactions and instead it supports atomic operations 
+It doesn't have any constraints like Foreign key constraint as it is in relational databases
+MongoDB is schemaless It doesn't have schema like Relational databases where we have to alter the table accordingly when a new parameter is to be added to the table.
+
+
+***********************Advntages of Normalization*******************
+1. Free the database from modification anamolies
+2.Minimize redesign when extending the database
+3.Aviod any bias to any particular design access patterns
+************************************
+
+MongoDB does not support transactions.Eventhought it doesn't support transactions it does the same thing as that of transactions by making the all changes given or none of them which is the same as transactions and it supports ACID (Atomicity,Consistency,Isolation and Durability) 
