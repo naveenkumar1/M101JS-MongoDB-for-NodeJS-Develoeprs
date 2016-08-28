@@ -15,3 +15,23 @@ MongoDB is schemaless It doesn't have schema like Relational databases where we 
 ************************************
 
 MongoDB does not support transactions.Eventhought it doesn't support transactions it does the same thing as that of transactions by making the all changes given or none of them which is the same as transactions and it supports ACID (Atomicity,Consistency,Isolation and Durability) 
+
+The ways to overcome the lack of transactions in MongoDB are:-
+1. Restructuring the document so that everything happens in a single document
+2.using some external code or software that facilitates the locking mechanism so that the purpose of transaction can be achieved.
+3. Tolerate some level of inconsitency-- Facebook feed not the same across all the users
+
+One to One relations
+Each item corresponds to another item
+We can keep the employee and resume as two different documents in different collection and we can link both of the documents byusing the _id field.
+When we ahve to go by splitting rather than embedding:-
+Frequency of access --- 
+Growing size of the working set
+If the order document size is greater than 16MB
+Atomicity of data and evven 0% tolerance to inconsistency
+
+
+*******Benefits of Embedding ******************
+Improve read performance
+One trip round to the DB
+
