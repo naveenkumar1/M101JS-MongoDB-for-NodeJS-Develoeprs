@@ -1,0 +1,14 @@
+n this problem you will analyze a profile log taken from a mongoDB instance. To start, please download sysprofile.json from Download Handout link and import it with the following command:
+
+mongoimport --drop -d m101 -c profile sysprofile.json
+Now query the profile data, looking for all queries to the students collection in the database school2, sorted in order of decreasing latency. What is the latency of the longest running operation to the collection, in milliseconds?
+
+
+5580001
+10000000
+2350
+19776550
+15820
+
+
+Answer:- 15820

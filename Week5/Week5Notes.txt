@@ -1,0 +1,39 @@
+Storage engine is an interface that interacts with the persistent data storage and the MongoDB server.
+MongoDB server needs some space on the disk to store all the data that is inserted into the DB. SO inorder to facilitate this process the Storagee engines comes into play
+Storege engine decides the memory used to optimize the process
+
+Since the disk has very low latency but inorder to writes to be performed at a high speed,The storage engines initially push the content to be stored into the memory and then it takes from Memory and then it writes to the disk
+
+Storage engines defines the efficiency of the background running processes
+
+If we have bunch of servers running as a shard the storage engine doesn't affects the performance and the communication between various servers
+It doesn't affect the Datbase API that is presented to the programmers
+
+There are 2 types of Storage Engines --- MMAP v1 and WiredTiger
+
+Storage Engines directly affects 2 parameters 
+They are the data file format
+Format of file indexes
+
+THe wire protocol of the drivers is not at all affected because the wireprotocol interact with the server and the server then interacts with the storage engine
+
+Data file format is directly affected because it is the data that is going to be written on to the disk through the format of the data. Indexes are the ones that affect the performance and directly affects the data so the 2  possible options are data file format and the indexes of the files
+
+It is not going to affect the Architecture of the server because Architecture of the server is independent of the storage engine
+
+
+MMAP v1 is the default storagee engine and it uses the default MMAP v1 undercovers to make the calls
+
+MMAP storage engine offers collection level concurrency. MMAP v1 offers Inwrite place updates and as it offers collection level locking it works in such a way that one write and multiple reads 
+Operating system decides what needs to be in memory and what needs to be in disk
+
+
+MMAPv1 automatically allocates power-of-two-sized documents when new documents are inserted
+MMAPv1 is built on top of the mmap system call that maps files into memory
+Power of 2 document padding is a feature in MMAP storge engine
+
+WiredTiger storage offers document level concurrency and it will append to the end of the file
+when we are updating a single document the entire document is rewritten on the disk with updated content and freeing up the space on the disk that is previously allocated
+
+
+
