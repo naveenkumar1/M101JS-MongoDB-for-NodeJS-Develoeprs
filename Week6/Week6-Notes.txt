@@ -1,0 +1,79 @@
+Aggregation framework is a set of analytical tools inside MongoDB that allows you to run  various types of reports, or analysis on 1 more documents on different collections
+Aggregation framework is based on the idea of pipeline each stage takes input from previous stage of output streamingly
+Eachstage has a separate data processor which performs certain tasks like filtering and then performs additional processing and gives an output
+Pipelines work with MongoDB collections that each stage performs certain task and produces output to the next stage and gives  a straming output
+In many cases we have to include a stage several times to achive the output required
+
+Commands in Aggregation pipelines
+Match-- find
+Project
+Sort,skip and Limit
+
+
+If we want to find all the companies that are found in 2004 we can do that using find but we can use match $match to perform the same task
+db.companies.find({year_founded:2004}); 
+							(or)
+db.companies.aggregate([{$match:{"founded_year":2004}}]);
+
+A pipeline is an array with documents as elements and each of the documents must stuipulate a  particular stage operator 
+
+db.companies.aggregate([{$match:{"founded_year":2004}},{$project:{"name":1,"_id":0,"founded_year":1}}]);
+
+Here the aggregation pipelines has 2 stages match stage and a project stage 
+the match stage matches all the documents to the particular query(filter)operator specified and it returns the output to the next projecct stage where it gives the output of the documents with the required fields only
+
+MongoDB query performance
+db.companies.aggregate([{$match:{"founded_year":2004}},{$limit:5},{$project:{"name":1,"_id":0,"founded_year":1}}]);
+
+db.companies.aggregate([{$match:{"founded_year":2004}},{$project:{"name":1,"_id":0,"founded_year":1},{$limit:5}}]);
+
+Both the queries return the same output but there is a significant difference in the performance
+In the Second query it matches all the documents for the filter and aafter that it has to go through the all matching documents project phase
+
+Say if there are 200 documents returned as output and we want to disply only 5 it is an unnecessary task to run project phase for those 200 whcih doesn't needsfor us to get displayed
+
+In first query it filters the documents based on the filter and then it limits the output from the previous stagge to 5 and then it runs the projection on those 5 documents only which results in high performance agains
+
+MongoDB uses the pipeline order specified so that it is advisory to keep things in mind planning the queries
+
+Sort,skip and limit is the order that needs to be present in the aggregatiion pipeline
+
+In this lesson we learnt how to build a bbasic pipeline using the known aggregation operators
+
+
+Expressions in Aggregation pipeline
+
+Boolean  Exprssions,Set Expressions,Comparision Expressions,Date Expressions and COnditional Expressions
+
+ $project --- Introduction to Reshaping
+
+db.companies.aggregate([{$match:{"funding_rounds.investments.financial_org.peramalink":"greylock"}},{$project:{"name":1,"_id":0,"ipo":"$ipo.pub_year",valuation:"$ipo.valuation","founders":"$funding_rounds.investments.financial_aorg.permalink"}}]);
+
+What does this query does?
+Itreturns the matching documents from the query filter and inputs the documents to the projection phase
+which instead returns the output with the specific values to the key and value format
+
+When wa try to do the same using find query it returns the documents but in the format of key and value format 
+but value as a document
+
+If we want to the above aggreagtion query to return the output as find then we ahve to execute the query like this
+db.companies.aggregate([{$match:{"funding_rounds.investments.financial_org.peramalink":"greylock"}},{$project:{"name":1,"_id":0,"ipo":"$ipo.pub_year",valuation:"$ipo.valuation","founders":"$funding_rounds.investments.financial_aorg.permalink"}}]);
+
+Project in aggreation framework allows us to create the project in the way we want to display rather than just printing the elements present
+
+
+$unwind
+Unwind will produce the number of documents included for the elements in the array
+
+$filter
+filter is used to selecct certain elements in an array based on an certain query criteria
+It takes 3 input parameters that are:-
+input,
+as
+condition
+
+
+Accumulators
+$sum,$avg,$first,$last,$max,$min,$push,$addToset are the accumulators that are introduced IN Mongo 3.2 
+
+
