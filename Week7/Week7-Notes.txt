@@ -1,0 +1,35 @@
+Write concern
+Whenever  we perform a write to the database it will get stored in the journal that resides in the memory of the computer it won't get persisted on to the disk instantly
+SO inorder to make sure that the data gets persisted we have 2 values that need to be set
+they are w and j values
+whenever w=1 it means the write is acknowledged by the journal(i.e., it gives info if the write is successful to the journal)
+j value gives info regarding whether the data is persisted to the disk or not
+so in order to remove the fault tolerance it is advisable to keep the j value to true so that the content is written to the disk but makes the operation slow.
+
+Sharding is the process of sharing the collection across multiple servers
+
+Whenver a  network error arrises if there are some unpersisted writes to the disk it reads from the journal and it pushes the changes to disk which makes the data consistent
+
+Whenever a network error arises the acknowledged write is not returned from the server and we're not sure whether the write happened to the database or not
+This problem can be eliminated for inserts
+Because if we want to insert the same doc with _id field it throws an duplicate key error
+
+But for update the case is not the same . SO it is advisory to turn your updates into inserts so that thwe updates can be fault tolerant
+
+
+Introduction to Replication:-
+Availability and Fault tolerance can be achieved by using Replication
+Replica set is a set of mongo nodes
+Suppose we have a set of 3 mongo nodes we ahve 1 primary and 2 secondary nodes.whenever a primary nodes encounters problem a secondary will be selected as a primary and the data written to the primary wil be asynchronously sync the data into the secondary node
+The miniumum number of nodes that need to be present to elect a secondary node as a primary nodes is same as the number of nodes that are already present andd the primary node that went down will be returned back as a secondary node
+
+Replica set elections:-
+
+An arbiter node is a node that is present just for voting purposes
+THe nodes are of 4 types namely normal(regular),arbiter node for recovery purposes, delayed node that is for disaaster recovery purposes.Delayed node can also participate in the voting but it cannot become  a primary node. The priority is set to 0 for hidden node and Delayed node. Hidden node is used for data analytic purposes
+
+Creating a replica set
+rs.slaveOk() is the command that we have to give to allow read from secondary node when inserted data into the primary
+
+Creating Replica set Internals
+Each mongod has an oplog and theese oplog can be kept in sync with the primary i.e., secondaries are continously reading the oplog from the primary

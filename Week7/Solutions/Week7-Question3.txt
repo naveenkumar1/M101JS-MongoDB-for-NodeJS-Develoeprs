@@ -1,0 +1,42 @@
+Which of the following statements are true about choosing and using a shard key? Check all that apply.
+MongoDB cannot enforce unique indexes on a sharded collection other than the shard key itself or indexes preferred by the shard key.
+The shard key must be unique.
+There must be an index on the collection that starts with the shard key.
+You can change the shard key on a collection if you desire.
+Any update that does not contain the shard key will be sent to all shards. 
+
+ANswers:-
+
+
+
+    The shard key must be unique
+
+Incorrect.
+
+    There must be a index on the collection that starts with the shard key.
+
+Correct.
+
+    All sharded collections must have an index that starts with the shard key.
+
+https://docs.mongodb.org/manual/core/sharding-shard-key-indexes/
+
+    Mongo can not enforce unique indexes on a sharded collection other than the shard key itself.
+
+Correct.
+
+    For sharded collections these unique indexes cannot enforce uniqueness because insert and indexing operations are local to each shard.
+
+https://docs.mongodb.org/manual/tutorial/enforce-unique-keys-for-sharded-collections/
+
+    Any update that does not contain the shard key will be sent to all shards.
+
+Correct. Mongos will not be able to determine which shard contain all the related entries.
+
+    You can change the shard key on a collection if you desire.
+
+Incorrect.
+
+    Shard keys are immutable and cannot be changed after insertion. See the system limits for sharded cluster for more information.
+
+https://docs.mongodb.org/manual/core/sharding-shard-key/#sharding-shard-key
